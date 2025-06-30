@@ -37,7 +37,7 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-from inspect import getargspec
+from inspect import getfullargspec
 
 try:
     from xmlrpc.server import SimpleXMLRPCDispatcher
@@ -69,7 +69,7 @@ class DjangoXMLRPCDispatcher(SimpleXMLRPCDispatcher):
         except:
             sig = {
                 'returns': 'string',
-                'args': ['string' for arg in getargspec(func)[0]],
+                'args': ['string' for arg in getfullargspec(func)[0]],
             }
 
         return [sig['returns']] + sig['args']
